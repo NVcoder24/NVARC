@@ -1,0 +1,54 @@
+NVARC163 basic assembler
+
+char table:
+    1) % => register
+    2) # => memory pointer
+    3) $ => variable
+    4) b => binary value
+    5) fmem => free memory section
+    5) -- => comment
+
+sections:
+    1) DATA => section where you define variables
+    2) PROG => program section
+    3) INCLUDE => includes variables from json file
+
+include syntax:
+INCLUDE:
+    "mycfg.json"
+    "nvarc163_vm_vars.json"
+
+variable define syntax:
+DATA:
+    $var1 123
+    $var2 b10101
+    $myvar 32
+    $arraymaxindex 378
+
+program syntax:
+PROG:
+    WR %A, $var1 --store var1
+    WR %B, 123
+    SUM %A, %B, %C
+    -- MEM 1234 we dont need that
+    MEM fm0
+    IST %C
+    HLT
+
+example program:
+PROG:
+    WR %C, 69
+    #no -- will point to instruction under (WR %B, 1)
+    WR %B, 1
+    SUM %A, %B, %A
+    WR %D, #yes
+    MEM %D
+    JE %A, %C
+    WR %D, #no
+    MEM %D
+    JMP
+    #yes
+    WR %B, 0
+    WR %C, 0
+    WR %D, 0
+    HLT
