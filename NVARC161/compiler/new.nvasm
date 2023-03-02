@@ -1,0 +1,19 @@
+DATA:   
+
+PROG:
+    WRA 0
+    WRB 1
+    #no
+    SUM
+    STA fmem0
+    WRB 69
+    LDC fmem0
+    WREXP
+    JMPE #yes
+    WRB 1
+    JMP #no
+    #yes
+    LDA fmem0
+    LDB fmem0
+    LDC fmem0
+    HLT
