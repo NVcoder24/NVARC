@@ -1,0 +1,14 @@
+VAR:
+    dest 69
+PROG:
+    WR %A, $dest
+    #no
+    WR %JR, #yes
+    JE %AALU, %A
+    WR %BALU, 1
+    SUM
+    MOV %CALU, %AALU
+    WR %JR, #no
+    JMP
+    #yes
+    HLT
